@@ -98,18 +98,18 @@ string Cell::getValueText()
 	}
 }
 
-short Cell::getValueType()
+bool Cell::isNumeric()
 {
-	return value_type;
+	return is_numeric;
 }
 
 void Cell::setValue(double val)
 {
-	if (value_type == 0)
+	if (is_numeric == NULL)
 	{
-		value_type = 1;
+		is_numeric = true;
 	}
-	if(value_type == 1)
+	if(is_numeric == true)
 	{
 		num_val = val;
 	}
@@ -117,11 +117,11 @@ void Cell::setValue(double val)
 
 void Cell::setValue(string val)
 {
-	if (value_type == 0)
+	if (is_numeric == NULL)
 	{
-		value_type = 2;
+		is_numeric = false;
 	}
-	if(value_type == 2)
+	if(is_numeric = false)
 	{
 		text_val = val;
 	}

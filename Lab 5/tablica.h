@@ -31,13 +31,13 @@ class Cell {
     public:
 		double getValueNum();
 		string getValueText();
-		short getValueType();
+		bool isNumeric();
 		void setValue(double val);
 		void setValue(string val);
 	private:
 		double num_val = 0;
 		string text_val = "";
-		short value_type = 0; // Typ zmiennej -> 1 = double, 2 = string
+		bool is_numeric;
 };
 
 #endif
