@@ -4,6 +4,8 @@
 
 using namespace std;
 
+// Klasa obsługująca tablicę
+
 bool Array::isArrayInitialized()
 {
 	return arrayIsInitialized;
@@ -76,3 +78,51 @@ int Array::getValue(int x, int y)
 
 int Array::getArraySizeX() { return sizeX; }
 int Array::getArraySizeY() { return sizeY; }
+
+
+// Klasa obsługująca komórki
+
+double Cell::getValueNum()
+{
+	if(value_type == 1)
+	{
+		return num_val;
+	}
+}
+
+string Cell::getValueText()
+{
+	if(value_type == 2)
+	{
+		return text_val;
+	}
+}
+
+short Cell::getValueType()
+{
+	return value_type;
+}
+
+void Cell::setValue(double val)
+{
+	if (value_type == 0)
+	{
+		value_type = 1;
+	}
+	if(value_type == 1)
+	{
+		num_val = val;
+	}
+}
+
+void Cell::setValue(string val)
+{
+	if (value_type == 0)
+	{
+		value_type = 2;
+	}
+	if(value_type == 2)
+	{
+		text_val = val;
+	}
+}

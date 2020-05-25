@@ -1,6 +1,11 @@
 #ifndef TABLICA_H
 #define TABLICA_H
 
+#include <string>
+using namespace std;
+
+// Klasa obsługująca tablicę
+
 class Array
 {
 	public:
@@ -18,6 +23,21 @@ class Array
 		int sizeY = 0;
 		bool arrayIsInitialized = false;
 		int **arr;
+};
+
+// Klasa obsługująca komórki
+
+class Cell {
+    public:
+		double getValueNum();
+		string getValueText();
+		short getValueType();
+		void setValue(double val);
+		void setValue(string val);
+	private:
+		double num_val = 0;
+		string text_val = "";
+		short value_type = 0; // Typ zmiennej -> 1 = double, 2 = string
 };
 
 #endif
