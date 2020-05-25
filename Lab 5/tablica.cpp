@@ -84,7 +84,7 @@ int Array::getArraySizeY() { return sizeY; }
 
 double Cell::getValueNum()
 {
-	if(value_type == 1)
+	if(is_numeric == true)
 	{
 		return num_val;
 	}
@@ -92,7 +92,7 @@ double Cell::getValueNum()
 
 string Cell::getValueText()
 {
-	if(value_type == 2)
+	if(is_numeric == false)
 	{
 		return text_val;
 	}
@@ -105,7 +105,7 @@ bool Cell::isNumeric()
 
 void Cell::setValue(double val)
 {
-	if (is_numeric == NULL)
+	if (num_val == 0 && text_val == "")
 	{
 		is_numeric = true;
 	}
@@ -117,7 +117,7 @@ void Cell::setValue(double val)
 
 void Cell::setValue(string val)
 {
-	if (is_numeric == NULL)
+	if (num_val == 0 && text_val == "")
 	{
 		is_numeric = false;
 	}
