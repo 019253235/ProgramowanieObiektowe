@@ -126,3 +126,13 @@ void Cell::setValue(string val)
 		text_val = val;
 	}
 }
+
+Cell::Cell(double val)
+{
+	setValue(val);
+}
+
+Cell::Cell(string val)
+{
+	setValue(val);
+}

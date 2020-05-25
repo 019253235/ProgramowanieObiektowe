@@ -34,6 +34,8 @@ class Cell {
 		bool isNumeric();
 		void setValue(double val);
 		void setValue(string val);
+		Cell(double val);
+		Cell(string val);
 	private:
 		double num_val = 0;
 		string text_val = "";
