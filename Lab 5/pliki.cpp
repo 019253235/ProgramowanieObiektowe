@@ -40,12 +40,12 @@ int readFile(class Array *arr) // Odczyt z pliku
 		while(!s.eof())
 		{
 			getline(s,currentLine);
-			cout<< currentLine << endl;
+			cout << currentLine << endl;
 		}
 	}
 	else
 	{ 
-	cout << "Plik nie istnieje.";
+	cout << "Plik nie istnieje." << endl;
 	}
 	s.close();
 }

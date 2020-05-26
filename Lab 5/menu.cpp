@@ -12,7 +12,7 @@ void functions_menu(class Array *arr, bool isRow)
 	if(arr->isArrayInitialized() == false)
 	{
 		system("clear");
-		cout << "Najpierw musisz utworzyc tablice!";
+		cout << "Najpierw musisz utworzyc tablice!" << endl;
 		menu(arr);
 	}
 	else if(arr->is_numeric == false)
@@ -166,38 +166,42 @@ void setSize_menu(class Array *arr)
 		cin >> y;
 		if(!cin)
 		{
-			cin.clear();   
+			cin.clear();
 			cin.ignore(100, '\n');
 		}
 		system("clear");
 	} while(y <= 0);
 
-	short type_choice;
-	system("clear");
-	cout << "Wybierz typ danych w tablicy:" << endl;
-	cout << "1. Liczbowe" << endl;
-	cout << "2. Tekstowe" << endl;
-	cout << "Wybierasz: ";
-	cin >> type_choice;
-	if(!cin)
+	if (arr->isArrayInitialized() == false)
 	{
-		cin.clear();   
-		cin.ignore(100, '\n');
-	}
-	switch(type_choice)
-	{
-		case 1:
-			arr->is_numeric = true;
-			arr->setArraySize(x, y);
-			break;
-		case 2:
-			arr->is_numeric = false;
-			arr->setArraySize(x, y);
-			break;
-		default:
-			cout << "Wybrales nieprawidlowa opcje!" << endl;
-			setSize_menu(arr);
-			break;
+		short type_choice;
+		system("clear");
+		cout << "Wybierz typ danych w tablicy:" << endl;
+		cout << "1. Liczbowe" << endl;
+		cout << "2. Tekstowe" << endl;
+		cout << "Wybierasz: ";
+		cin >> type_choice;
+		if(!cin)
+		{
+			cin.clear();   
+			cin.ignore(100, '\n');
+		}
+		switch(type_choice)
+		{
+			case 1:
+				arr->is_numeric = true;
+				arr->setArraySize(x, y);
+				break;
+			case 2:
+				arr->is_numeric = false;
+				arr->setArraySize(x, y);
+				break;
+			default:
+				system("clear");
+				cout << "Wybrales nieprawidlowa opcje!" << endl;
+				setSize_menu(arr);
+				break;
+		}
 	}
 }
 
@@ -206,7 +210,7 @@ void editCell_menu(class Array *arr)
 	if(arr->getArraySizeX() == 0 || arr-> getArraySizeY() == 0)
 	{
 		system("clear");
-		cout << "Najpierw musisz utworzyc tablice!\n";
+		cout << "Najpierw musisz utworzyc tablice!" << endl;
 	}
 	else
 	{
@@ -237,10 +241,7 @@ void editCell_menu(class Array *arr)
 int menu(class Array *arr)
 {
 	int choice = 0;
-	if(arr->isArrayInitialized() == false)
-	{
-		cout << "1. Ustaw rozmiar tablicy" << endl;
-	}
+	cout << "1. Ustaw rozmiar tablicy" << endl;
 	cout << "2. Edytuj tresc komorek" << endl;
 	cout << "3. Wyswietl tablice" << endl;
 	cout << "4. Odczyt z pliku" << endl;
