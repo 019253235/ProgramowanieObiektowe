@@ -15,6 +15,12 @@ void functions_menu(class Array *arr, bool isRow)
 		cout << "Najpierw musisz utworzyc tablice!";
 		menu(arr);
 	}
+	else if(arr->is_numeric == false)
+	{
+		system("clear");
+		cout << "Operacje mozna wykonac tylko na tabeli z danymi liczbowymi!" << endl;
+		menu(arr);
+	}
 	else
 	{
 		int cellId = 0, choice = 0;
@@ -166,7 +172,33 @@ void setSize_menu(class Array *arr)
 		system("clear");
 	} while(y <= 0);
 
-	arr->setArraySize(x, y);
+	short type_choice;
+	system("clear");
+	cout << "Wybierz typ danych w tablicy:" << endl;
+	cout << "1. Liczbowe" << endl;
+	cout << "2. Tekstowe" << endl;
+	cout << "Wybierasz: ";
+	cin >> type_choice;
+	if(!cin)
+	{
+		cin.clear();   
+		cin.ignore(100, '\n');
+	}
+	switch(type_choice)
+	{
+		case 1:
+			arr->is_numeric = true;
+			arr->setArraySize(x, y);
+			break;
+		case 2:
+			arr->is_numeric = false;
+			arr->setArraySize(x, y);
+			break;
+		default:
+			cout << "Wybrales nieprawidlowa opcje!" << endl;
+			setSize_menu(arr);
+			break;
+	}
 }
 
 void editCell_menu(class Array *arr)
@@ -174,11 +206,12 @@ void editCell_menu(class Array *arr)
 	if(arr->getArraySizeX() == 0 || arr-> getArraySizeY() == 0)
 	{
 		system("clear");
-		cout << "Najpierw musisz utworzyc tablice!" << endl;
+		cout << "Najpierw musisz utworzyc tablice!\n";
 	}
 	else
 	{
-		int x = 0, y = 0, value;
+		int x = 0, y = 0, valueNum;
+		string valueText;
 		do
 		{
 			system("clear");
@@ -186,9 +219,17 @@ void editCell_menu(class Array *arr)
 			cin >> x;
 			cout << "Numer kolumny: ";
 			cin >> y;
-			cout << "Liczba: ";
-			cin >> value;
-		} while(arr->setValue(x - 1, y - 1, value) == -10);
+			if(arr->is_numeric)
+			{
+				cout << "Liczba: ";
+				cin >> valueNum;
+			}
+			else
+			{
+				cout << "Tekst: ";
+				cin >> valueText;
+			}
+		} while(arr->setValue(x - 1, y - 1, valueNum) == -10 && arr->setValue(x - 1, y - 1, valueText) == -10);
 		system("clear");
 	}
 }

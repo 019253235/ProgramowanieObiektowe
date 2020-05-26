@@ -10,8 +10,15 @@ int tablica_wysw(class Array *arr)
 	{
 		for(int j = 0; j < arr->getArraySizeY(); j++)
 		{
-			cout << arr->getValue(i, j) <<" | ";
-			cout << endl;
+			if(arr->is_numeric == true)
+			{
+				cout << arr->getValueNum(i, j) << " | ";
+			}
+			else
+			{
+				cout << arr->getValueText(i, j) << " | ";
+			}
 		}
+		cout << endl;
 	}
 }

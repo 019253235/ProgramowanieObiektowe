@@ -26,6 +26,11 @@ bool Array::isInBoundsY(int y)
 	return (y < sizeY && y >= 0);
 }
 
+void Array::setArrayType(bool type)
+{
+	is_numeric = type;
+}
+
 int Array::setArraySize(int x, int y) // Metoda tworząca tablicę
 {
 	if(arrayIsInitialized == false)
@@ -34,10 +39,11 @@ int Array::setArraySize(int x, int y) // Metoda tworząca tablicę
 		{
 			sizeX = x;
 			sizeY = y;
-			arr = new int *[sizeX];
+			arr = new Cell *[sizeX];
 			for(int i = 0; i < sizeX; i++)
 			{
-				arr[i] = new int [sizeY];		
+				arr[i] = new Cell[sizeY];
+				arr[i]->is_numeric = is_numeric;
 			}
 			arrayIsInitialized = true;
 		}
@@ -52,11 +58,11 @@ int Array::setArraySize(int x, int y) // Metoda tworząca tablicę
 	}
 }
 
-int Array::setValue(int x, int y, int value)
+int Array::setValue(int x, int y, double value)
 {
-	if(isInBounds(x,y))
+	if(isInBounds(x,y) && is_numeric)
 	{
-		arr[x][y] = value;
+		arr[x][y].setValue(value);
 	}
 	else
 	{
@@ -64,15 +70,39 @@ int Array::setValue(int x, int y, int value)
 	}
 }
 
-int Array::getValue(int x, int y)
+int Array::setValue(int x, int y, string value)
 {
-	if(isInBounds(x,y))
+	if(isInBounds(x,y) && (is_numeric == false))
 	{
-		return arr[x][y];
+		arr[x][y].setValue(value);
 	}
 	else
 	{
 		return -10;
+	}
+}
+
+double Array::getValueNum(int x, int y)
+{
+	if(isInBounds(x,y))
+	{
+		return arr[x][y].getValueNum();
+	}
+	else
+	{
+		return -10;
+	}
+}
+
+string Array::getValueText(int x, int y)
+{
+	if(isInBounds(x,y))
+	{
+		return arr[x][y].getValueText();
+	}
+	else
+	{
+		return "-10";
 	}
 }
 
@@ -98,20 +128,20 @@ string Cell::getValueText()
 	}
 }
 
-bool Cell::isNumeric()
-{
-	return is_numeric;
-}
-
 void Cell::setValue(double val)
 {
 	if (num_val == 0 && text_val == "")
 	{
 		is_numeric = true;
 	}
+
 	if(is_numeric == true)
 	{
 		num_val = val;
+	}
+	else
+	{
+		text_val = to_string(val);
 	}
 }
 
@@ -121,18 +151,9 @@ void Cell::setValue(string val)
 	{
 		is_numeric = false;
 	}
-	if(is_numeric = false)
+
+	if(is_numeric == false)
 	{
 		text_val = val;
 	}
-}
-
-Cell::Cell(double val)
-{
-	setValue(val);
-}
-
-Cell::Cell(string val)
-{
-	setValue(val);
 }

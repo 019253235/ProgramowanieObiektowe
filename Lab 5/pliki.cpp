@@ -12,10 +12,17 @@ int saveFile(class Array *arr) // Zapis do pliku
 	s.open("baza.txt");
 	for(int i = 0; i < arr->getArraySizeX(); i++)
 	{
-		cout<<std::endl;
+		cout << endl;
 		for(int j=0; j < arr->getArraySizeY(); j++)
 		{
-			s << arr->getValue(i, j) <<" | ";
+			if(arr->is_numeric)
+			{
+				s << arr->getValueNum(i, j) << " | ";
+			}
+			else
+			{
+				s << arr->getValueText(i, j) << " | ";
+			}
 		}
 		s << endl;
 	}

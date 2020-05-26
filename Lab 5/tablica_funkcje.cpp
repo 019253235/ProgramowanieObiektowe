@@ -5,7 +5,7 @@ int sumRow(class Array *arr, int row)
     int sum = 0;
     for(int i = 0; i < arr->getArraySizeY(); i++)
     {
-        sum += arr->getValue(row - 1, i);
+        sum += arr->getValueNum(row - 1, i);
     }
     return sum;
 }
@@ -15,7 +15,7 @@ int sumCol(class Array *arr, int col)
     int sum = 0;
     for(int i = 0; i < arr->getArraySizeX(); i++)
     {
-        sum += arr->getValue(col - 1, i);
+        sum += arr->getValueNum(col - 1, i);
     }
     return sum;
 }
@@ -25,9 +25,9 @@ int findMaxInRow(class Array *arr, int row)
     int max = 0;
     for(int i = 0; i < arr->getArraySizeY(); i++)
     {
-        if (arr->getValue(row - 1, i) > max)
+        if (arr->getValueNum(row - 1, i) > max)
         {
-            max = arr->getValue(row - 1, i);
+            max = arr->getValueNum(row - 1, i);
         }
     }
     return max;
@@ -38,9 +38,9 @@ int findMaxInCol(class Array *arr, int col)
     int max = 0;
     for(int i = 0; i < arr->getArraySizeX(); i++)
     {
-        if (arr->getValue(col - 1, i) > max)
+        if (arr->getValueNum(col - 1, i) > max)
         {
-            max = arr->getValue(col - 1, i);
+            max = arr->getValueNum(col - 1, i);
         }
     }
     return max;
@@ -53,11 +53,11 @@ int findMinInRow(class Array *arr, int row)
     {
         if(i == 0)
         {
-            min = arr->getValue(row - 1, i);
+            min = arr->getValueNum(row - 1, i);
         }
-        else if (arr->getValue(row - 1, i) < min)
+        else if (arr->getValueNum(row - 1, i) < min)
         {
-            min = arr->getValue(row - 1, i);
+            min = arr->getValueNum(row - 1, i);
         }
     }
     return min;
@@ -70,11 +70,11 @@ int findMinInCol(class Array *arr, int col)
     {
         if(i == 0)
         {
-            min = arr->getValue(col - 1, i);
+            min = arr->getValueNum(col - 1, i);
         }
-        else if (arr->getValue(col - 1, i) < min)
+        else if (arr->getValueNum(col - 1, i) < min)
         {
-            min = arr->getValue(col - 1, i);
+            min = arr->getValueNum(col - 1, i);
         }
     }
 }
