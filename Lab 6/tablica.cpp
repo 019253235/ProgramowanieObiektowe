@@ -28,7 +28,7 @@ bool Array::isInBoundsY(int y)
 
 void Array::setArrayType(bool type)
 {
-	is_numeric = type;
+	is_default_numeric = type;
 }
 
 int Array::setArraySize(int x, int y) // Metoda tworząca tablicę
@@ -43,7 +43,7 @@ int Array::setArraySize(int x, int y) // Metoda tworząca tablicę
 			for(int i = 0; i < sizeX; i++)
 			{
 				arr[i] = new Cell[sizeY];
-				arr[i]->is_numeric = is_numeric;
+				arr[i]->is_numeric = is_default_numeric;
 			}
 			arrayIsInitialized = true;
 		}
@@ -60,7 +60,7 @@ int Array::setArraySize(int x, int y) // Metoda tworząca tablicę
 
 int Array::setValue(int x, int y, double value)
 {
-	if(isInBounds(x,y) && is_numeric)
+	if(isInBounds(x,y) && arr[x][y].is_numeric)
 	{
 		arr[x][y].setValue(value);
 	}
@@ -72,7 +72,7 @@ int Array::setValue(int x, int y, double value)
 
 int Array::setValue(int x, int y, string value)
 {
-	if(isInBounds(x,y) && (is_numeric == false))
+	if(isInBounds(x,y) && (arr[x][y].is_numeric == false))
 	{
 		arr[x][y].setValue(value);
 	}
@@ -82,28 +82,9 @@ int Array::setValue(int x, int y, string value)
 	}
 }
 
-double Array::getValueNum(int x, int y)
+Cell* Array::getCell(int x, int y)
 {
-	if(isInBounds(x,y))
-	{
-		return arr[x][y].getValueNum();
-	}
-	else
-	{
-		return -10;
-	}
-}
-
-string Array::getValueText(int x, int y)
-{
-	if(isInBounds(x,y))
-	{
-		return arr[x][y].getValueText();
-	}
-	else
-	{
-		return "-10";
-	}
+	return arr[x, y];
 }
 
 int Array::getArraySizeX() { return sizeX; }

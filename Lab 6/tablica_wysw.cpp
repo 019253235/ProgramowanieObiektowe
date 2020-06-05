@@ -10,13 +10,13 @@ int tablica_wysw(class Array *arr)
 	{
 		for(int j = 0; j < arr->getArraySizeY(); j++)
 		{
-			if(arr->is_numeric == true)
+			if(arr->getCell(i, j)->is_numeric == true)
 			{
-				cout << arr->getValueNum(i, j) << " | ";
+				cout << arr->getCell(i, j)->getValueNum() << " | ";
 			}
 			else
 			{
-				cout << arr->getValueText(i, j) << " | ";
+				cout << arr->getCell(i, j)->getValueText() << " | ";
 			}
 		}
 		cout << endl;

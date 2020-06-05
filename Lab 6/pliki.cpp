@@ -15,13 +15,13 @@ int saveFile(class Array *arr) // Zapis do pliku
 		cout << endl;
 		for(int j=0; j < arr->getArraySizeY(); j++)
 		{
-			if(arr->is_numeric)
+			if(arr->getCell(i, j)->is_numeric)
 			{
-				s << arr->getValueNum(i, j) << " | ";
+				s << arr->getCell(i, j)->getValueNum() << " | ";
 			}
 			else
 			{
-				s << arr->getValueText(i, j) << " | ";
+				s << arr->getCell(i, j)->getValueText() << " | ";
 			}
 		}
 		s << endl;

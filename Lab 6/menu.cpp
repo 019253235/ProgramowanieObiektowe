@@ -15,7 +15,7 @@ void functions_menu(class Array *arr, bool isRow)
 		cout << "Najpierw musisz utworzyc tablice!" << endl;
 		menu(arr);
 	}
-	else if(arr->is_numeric == false)
+	else if(arr->is_default_numeric == false)
 	{
 		system("clear");
 		cout << "Operacje mozna wykonac tylko na tabeli z danymi liczbowymi!" << endl;
@@ -176,7 +176,7 @@ void setSize_menu(class Array *arr)
 	{
 		short type_choice;
 		system("clear");
-		cout << "Wybierz typ danych w tablicy:" << endl;
+		cout << "Wybierz domyslny typ danych w tablicy:" << endl;
 		cout << "1. Liczbowe" << endl;
 		cout << "2. Tekstowe" << endl;
 		cout << "Wybierasz: ";
@@ -189,11 +189,11 @@ void setSize_menu(class Array *arr)
 		switch(type_choice)
 		{
 			case 1:
-				arr->is_numeric = true;
+				arr->is_default_numeric = true;
 				arr->setArraySize(x, y);
 				break;
 			case 2:
-				arr->is_numeric = false;
+				arr->is_default_numeric = false;
 				arr->setArraySize(x, y);
 				break;
 			default:
@@ -223,7 +223,7 @@ void editCell_menu(class Array *arr)
 			cin >> x;
 			cout << "Numer kolumny: ";
 			cin >> y;
-			if(arr->is_numeric)
+			if(arr->getCell(x, y)->is_numeric)
 			{
 				cout << "Liczba: ";
 				cin >> valueNum;

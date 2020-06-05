@@ -5,7 +5,7 @@ int sumRow(class Array *arr, int row)
     int sum = 0;
     for(int i = 0; i < arr->getArraySizeY(); i++)
     {
-        sum += arr->getValueNum(row - 1, i);
+        sum += arr->getCell(row - 1, i)->getValueNum();
     }
     return sum;
 }
@@ -15,7 +15,7 @@ int sumCol(class Array *arr, int col)
     int sum = 0;
     for(int i = 0; i < arr->getArraySizeX(); i++)
     {
-        sum += arr->getValueNum(col - 1, i);
+        sum += arr->getCell(col - 1, i)->getValueNum();
     }
     return sum;
 }
@@ -25,9 +25,9 @@ int findMaxInRow(class Array *arr, int row)
     int max = 0;
     for(int i = 0; i < arr->getArraySizeY(); i++)
     {
-        if (arr->getValueNum(row - 1, i) > max)
+        if (arr->getCell(row - 1, i)->getValueNum() > max)
         {
-            max = arr->getValueNum(row - 1, i);
+            max = arr->getCell(row - 1, i)->getValueNum();
         }
     }
     return max;
@@ -38,9 +38,9 @@ int findMaxInCol(class Array *arr, int col)
     int max = 0;
     for(int i = 0; i < arr->getArraySizeX(); i++)
     {
-        if (arr->getValueNum(col - 1, i) > max)
+        if (arr->getCell(col - 1, i)->getValueNum() > max)
         {
-            max = arr->getValueNum(col - 1, i);
+            max = arr->getCell(col - 1, i)->getValueNum();
         }
     }
     return max;
@@ -53,11 +53,11 @@ int findMinInRow(class Array *arr, int row)
     {
         if(i == 0)
         {
-            min = arr->getValueNum(row - 1, i);
+            min = arr->getCell(row - 1, i)->getValueNum();
         }
-        else if (arr->getValueNum(row - 1, i) < min)
+        else if (arr->getCell(row - 1, i)->getValueNum() < min)
         {
-            min = arr->getValueNum(row - 1, i);
+            min = arr->getCell(row - 1, i)->getValueNum();
         }
     }
     return min;
@@ -70,11 +70,11 @@ int findMinInCol(class Array *arr, int col)
     {
         if(i == 0)
         {
-            min = arr->getValueNum(col - 1, i);
+            min = arr->getCell(col - 1, i)->getValueNum();
         }
-        else if (arr->getValueNum(col - 1, i) < min)
+        else if (arr->getCell(col - 1, i)->getValueNum() < min)
         {
-            min = arr->getValueNum(col - 1, i);
+            min = arr->getCell(col - 1, i)->getValueNum();
         }
     }
 }

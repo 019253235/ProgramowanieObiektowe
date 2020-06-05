@@ -30,12 +30,13 @@ class Array
 		int setArraySize(int x, int y);
     	int setValue(int x, int y, double value);
 		int setValue(int x, int y, string value);
-		double getValueNum(int x, int y);
-		string getValueText(int x, int y);
+		// double getValueNum(int x, int y);
+		// string getValueText(int x, int y);
+		Cell* getCell(int x, int y);
 		int getArraySizeX();
 		int getArraySizeY();
 		void setArrayType(bool type);
-		bool is_numeric;
+		bool is_default_numeric;
 	private:
 		int sizeX = 0;
 		int sizeY = 0;
