@@ -77,6 +77,7 @@ int findMinInCol(class Array *arr, int col)
             min = arr->getCell(col - 1, i)->getValueNum();
         }
     }
+    return min;
 }
 
 double findAvgInRow(class Array *arr, int row)

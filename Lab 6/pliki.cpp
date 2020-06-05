@@ -6,7 +6,7 @@
 
 using namespace std;
 
-int saveFile(class Array *arr) // Zapis do pliku
+void saveFile(class Array *arr) // Zapis do pliku
 {
 	ofstream s;
 	s.open("baza.txt");
@@ -29,7 +29,7 @@ int saveFile(class Array *arr) // Zapis do pliku
 	s.close();
 }
 
-int readFile(class Array *arr) // Odczyt z pliku
+void readFile(class Array *arr) // Odczyt z pliku
 {
 	string currentLine;
 	ifstream s;

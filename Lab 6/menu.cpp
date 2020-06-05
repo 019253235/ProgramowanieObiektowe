@@ -205,6 +205,61 @@ void setSize_menu(class Array *arr)
 	}
 }
 
+void setColumnType_menu(class Array* arr)
+{
+	if (arr->getArraySizeX() == 0 || arr->getArraySizeY() == 0)
+	{
+		system("clear");
+		cout << "Najpierw musisz utworzyc tablice!" << endl;
+	}
+	else
+	{
+		short type_choice;
+		int col;
+		bool is_col_numeric;
+		do
+		{
+			do
+			{
+				col = 0;
+				cout << "Podaj numer kolumny: ";
+				cin >> col;
+				if (!cin)
+				{
+					cin.clear();
+					cin.ignore(100, '\n');
+				}
+				system("clear");
+			} while (col <= 0);
+			system("clear");
+			cout << "Wybierz typ danych w kolumnie:" << endl;
+			cout << "1. Liczbowe" << endl;
+			cout << "2. Tekstowe" << endl;
+			cout << "Wybierasz: ";
+			cin >> type_choice;
+			if (!cin)
+			{
+				cin.clear();
+				cin.ignore(100, '\n');
+			}
+			switch (type_choice)
+			{
+				case 1:
+					is_col_numeric = true;
+					break;
+				case 2:
+					is_col_numeric = false;
+					break;
+				default:
+					system("clear");
+					cout << "Wybrales nieprawidlowa opcje!" << endl;
+					break;
+			}
+		} 
+		while ((type_choice == 1 || type_choice == 0) && arr->setColType(col, is_col_numeric));
+	}
+}
+
 void editCell_menu(class Array *arr)
 {
 	if(arr->getArraySizeX() == 0 || arr-> getArraySizeY() == 0)
@@ -242,13 +297,14 @@ int menu(class Array *arr)
 {
 	int choice = 0;
 	cout << "1. Ustaw rozmiar tablicy" << endl;
-	cout << "2. Edytuj tresc komorek" << endl;
-	cout << "3. Wyswietl tablice" << endl;
-	cout << "4. Odczyt z pliku" << endl;
-	cout << "5. Zapis do pliku" << endl;
-	cout << "6. Operacje na wierszu" << endl;
-	cout << "7. Operacje na kolumnie" << endl;
-	cout << "8. Wyjdz z programu" << endl;
+	cout << "2. Zmien typ kolumny" << endl;
+	cout << "3. Edytuj tresc komorek" << endl;
+	cout << "4. Wyswietl tablice" << endl;
+	cout << "5. Odczyt z pliku" << endl;
+	cout << "6. Zapis do pliku" << endl;
+	cout << "7. Operacje na wierszu" << endl;
+	cout << "8. Operacje na kolumnie" << endl;
+	cout << "9. Wyjdz z programu" << endl;
 	cout << "Wybierasz: ";
 	
 	cin >> choice;
@@ -267,28 +323,32 @@ int menu(class Array *arr)
 			menu(arr);
 			break;
 		case 2:
-			editCell_menu(arr);
+			setColumnType_menu(arr);
 			menu(arr);
 			break;
 		case 3:
-			tablica_wysw(arr);
+			editCell_menu(arr);
 			menu(arr);
 			break;
 		case 4:
-			readFile(arr);
+			tablica_wysw(arr);
 			menu(arr);
 			break;
 		case 5:
-			saveFile(arr);
+			readFile(arr);
 			menu(arr);
 			break;
 		case 6:
-			functions_menu(arr, true);
+			saveFile(arr);
+			menu(arr);
 			break;
 		case 7:
-			functions_menu(arr, false);
+			functions_menu(arr, true);
 			break;
 		case 8:
+			functions_menu(arr, false);
+			break;
+		case 9:
 			return 0;
 			break;
 		default:

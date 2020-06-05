@@ -4,11 +4,11 @@
 
 using namespace std;
 
-int tablica_wysw(class Array *arr)
+void tablica_wysw(class Array *arr)
 {	
 	for(int i = 0; i < arr->getArraySizeY(); i++)
 	{
-		cout << (arr->getColType(i) ? "L" : "T") << " ";
+		cout << (arr->getColType(i) ? "L" : "T") << " | ";
 	}
 	cout << endl << endl;
 
