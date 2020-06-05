@@ -44,6 +44,11 @@ int Array::setArraySize(int x, int y) // Metoda tworząca tablicę
 			{
 				arr[i] = new Cell[sizeY];
 				arr[i]->is_numeric = is_default_numeric;
+				colType = new bool[sizeY];
+				for(int j = 0; j < sizeY; j++)
+				{
+					setColType(j, is_default_numeric);
+				}
 			}
 			arrayIsInitialized = true;
 		}
@@ -90,6 +95,19 @@ Cell* Array::getCell(int x, int y)
 int Array::getArraySizeX() { return sizeX; }
 int Array::getArraySizeY() { return sizeY; }
 
+void Array::setColType(int col, bool is_col_numeric)
+{
+	colType[col] = is_col_numeric;
+	for(int i = 0; i < sizeX; i++)
+	{
+		arr[i, col]->is_numeric = is_col_numeric;
+	}
+}
+
+bool Array::getColType(int col)
+{
+	return colType[col];
+}
 
 // Klasa obsługująca komórki
 

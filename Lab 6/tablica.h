@@ -37,10 +37,13 @@ class Array
 		int getArraySizeY();
 		void setArrayType(bool type);
 		bool is_default_numeric;
+		void setColType(int col, bool is_col_numeric);
+		bool getColType(int col);
 	private:
 		int sizeX = 0;
 		int sizeY = 0;
 		bool arrayIsInitialized = false;
+		bool *colType;
 		Cell **arr;
 };
 
