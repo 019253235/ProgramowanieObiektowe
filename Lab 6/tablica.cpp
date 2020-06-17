@@ -39,16 +39,16 @@ int Array::setArraySize(int x, int y) // Metoda tworząca tablicę
 		{
 			sizeX = x;
 			sizeY = y;
-			arr = new Cell *[sizeX];
+			arr = new Cell **[sizeX];
 			for(int i = 0; i < sizeX; i++)
 			{
-				arr[i] = new Cell[sizeY];
-				arr[i]->is_numeric = is_default_numeric;
+				arr[i] = new Cell *[sizeY];
 				colType = new bool[sizeY];
 			}
+
 			for (int j = 0; j < sizeY; j++)
 			{
-				setColType(j, is_default_numeric);
+				setColType(j, is_default_numeric, false);
 			}
 			arrayIsInitialized = true;
 		}
@@ -65,9 +65,9 @@ int Array::setArraySize(int x, int y) // Metoda tworząca tablicę
 
 int Array::setValue(int x, int y, double value)
 {
-	if(isInBounds(x,y) && arr[x][y].is_numeric)
+	if(isInBounds(x,y) && arr[x][y]->isNumeric())
 	{
-		arr[x][y].setValue(value);
+		arr[x][y]->setValue(value);
 	}
 	else
 	{
@@ -77,9 +77,9 @@ int Array::setValue(int x, int y, double value)
 
 int Array::setValue(int x, int y, string value)
 {
-	if(isInBounds(x,y) && (arr[x][y].is_numeric == false))
+	if(isInBounds(x,y) && (arr[x][y]->isNumeric() == false))
 	{
-		arr[x][y].setValue(value);
+		arr[x][y]->setValue(value);
 	}
 	else
 	{
@@ -89,21 +89,33 @@ int Array::setValue(int x, int y, string value)
 
 Cell* Array::getCell(int x, int y)
 {
-	return arr[x, y];
+	return arr[x][y];
 }
 
 int Array::getArraySizeX() { return sizeX; }
 int Array::getArraySizeY() { return sizeY; }
 
-int Array::setColType(int col, bool is_col_numeric)
+int Array::setColType(int col, bool is_col_numeric, bool safeToDelete)
 {
 	if (isInBoundsY(col))
 	{
 		colType[col] = is_col_numeric;
 		for (int i = 0; i < sizeX; i++)
 		{
-			arr[i, col]->is_numeric = is_col_numeric;
+			if (safeToDelete)
+			{
+				delete arr[i][col];
+			}
+			if (is_col_numeric)
+			{
+				arr[i][col] = new NumericCell;
+			}
+			else
+			{
+				arr[i][col] = new TextCell;
+			}
 		}
+		return 0;
 	}
 	else
 	{
@@ -118,48 +130,59 @@ bool Array::getColType(int col)
 
 // Klasa obsługująca komórki
 
-double Cell::getValueNum()
+bool Cell::isNumeric()
 {
-	if(is_numeric == true)
-	{
-		return num_val;
-	}
+	return is_numeric;
 }
 
-string Cell::getValueText()
+double NumericCell::getValueNum()
 {
-	if(is_numeric == false)
-	{
-		return text_val;
-	}
+	return value;
 }
 
-void Cell::setValue(double val)
+string NumericCell::getValueText()
 {
-	if (num_val == 0 && text_val == "")
-	{
-		is_numeric = true;
-	}
-
-	if(is_numeric == true)
-	{
-		num_val = val;
-	}
-	else
-	{
-		text_val = to_string(val);
-	}
+	return to_string(value);
 }
 
-void Cell::setValue(string val)
+void NumericCell::setValue(double val)
 {
-	if (num_val == 0 && text_val == "")
-	{
-		is_numeric = false;
-	}
+	value = val;
+}
 
-	if(is_numeric == false)
-	{
-		text_val = val;
-	}
+void NumericCell::setValue(string val)
+{
+	value = stod(val);
+}
+
+NumericCell::NumericCell()
+{
+	is_numeric = true;
+	value = 0;
+}
+
+string TextCell::getValueText()
+{
+	return value;
+}
+
+double TextCell::getValueNum()
+{
+	return stod(value);
+}
+
+void TextCell::setValue(string val)
+{
+	value = val;
+}
+
+void TextCell::setValue(double val)
+{
+	value = '0' + val;
+}
+
+TextCell::TextCell()
+{
+	is_numeric = false;
+	value = " ";
 }

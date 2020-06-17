@@ -16,7 +16,7 @@ void tablica_wysw(class Array *arr)
 	{
 		for(int j = 0; j < arr->getArraySizeY(); j++)
 		{
-			if(arr->getCell(i, j)->is_numeric == true)
+			if(arr->getCell(i, j)->isNumeric() == true)
 			{
 				cout << arr->getCell(i, j)->getValueNum() << " | ";
 			}

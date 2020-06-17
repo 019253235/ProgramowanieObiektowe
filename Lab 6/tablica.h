@@ -7,15 +7,39 @@ using namespace std;
 // Klasa obsługująca komórki
 
 class Cell {
-    public:
-		double getValueNum();
-		string getValueText();
+	
+	protected:
+		bool is_numeric;
+	public:
+		bool isNumeric();
+		virtual void setValue(double val) = 0;
+		virtual void setValue(string val) = 0;
+		virtual double getValueNum() = 0;
+		virtual string getValueText() = 0;
+};
+
+class NumericCell:  public Cell
+{
+	private:
+		double value;
+	public:
 		void setValue(double val);
 		void setValue(string val);
-		bool is_numeric;
+		double getValueNum();
+		string getValueText();
+		NumericCell();
+};
+
+class TextCell : public Cell
+{
 	private:
-		double num_val = 0;
-		string text_val = "";
+		string value;
+	public:
+		void setValue(double val);
+		void setValue(string val);
+		double getValueNum();
+		string getValueText();
+		TextCell();
 };
 
 // Klasa obsługująca tablicę
@@ -37,14 +61,14 @@ class Array
 		int getArraySizeY();
 		void setArrayType(bool type);
 		bool is_default_numeric;
-		int setColType(int col, bool is_col_numeric);
+		int setColType(int col, bool is_col_numeric, bool safeToDelete = true);
 		bool getColType(int col);
 	private:
 		int sizeX = 0;
 		int sizeY = 0;
 		bool arrayIsInitialized = false;
 		bool *colType;
-		Cell **arr;
+		Cell ***arr;
 };
 
 #endif

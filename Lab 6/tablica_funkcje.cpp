@@ -35,7 +35,7 @@ int findMaxInRow(class Array *arr, int row)
 
 int findMaxInCol(class Array *arr, int col)
 {
-    int max = 0;
+    double max = 0;
     for(int i = 0; i < arr->getArraySizeX(); i++)
     {
         if (arr->getCell(col - 1, i)->getValueNum() > max)

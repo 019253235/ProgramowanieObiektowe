@@ -256,7 +256,7 @@ void setColumnType_menu(class Array* arr)
 					break;
 			}
 		} 
-		while ((type_choice == 1 || type_choice == 0) && arr->setColType(col, is_col_numeric));
+		while ((type_choice != 1 && type_choice != 2) || (arr->setColType(col-1, is_col_numeric) == -10));
 	}
 }
 
@@ -270,6 +270,7 @@ void editCell_menu(class Array *arr)
 	else
 	{
 		int x = 0, y = 0, valueNum;
+		bool err = true;
 		string valueText;
 		do
 		{
@@ -278,17 +279,25 @@ void editCell_menu(class Array *arr)
 			cin >> x;
 			cout << "Numer kolumny: ";
 			cin >> y;
-			if(arr->getCell(x, y)->is_numeric)
+			if(arr->getCell(x, y)->isNumeric())
 			{
 				cout << "Liczba: ";
 				cin >> valueNum;
+				if (arr->setValue(x - 1, y - 1, valueNum) != -10)
+				{
+					err = false;
+				}
 			}
 			else
 			{
 				cout << "Tekst: ";
 				cin >> valueText;
+				if (arr->setValue(x - 1, y - 1, valueText) != -10)
+				{
+					err = false;
+				}
 			}
-		} while(arr->setValue(x - 1, y - 1, valueNum) == -10 && arr->setValue(x - 1, y - 1, valueText) == -10);
+		} while(err == true);
 		system("clear");
 	}
 }
